@@ -4,14 +4,12 @@
     <script src="http://cloud.github.com/downloads/processing-js/processing-js/processing-1.4.1.min.js"></script>
     <script type="text/processing" data-processing-target="mycanvas">
 
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Variable Set Up ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         var WINDOW_WIDTH = 1000;
-
         var WINDOW_HEIGHT = 600; 
 
         var skyline1List = new ArrayList<Skyline1>();
-
         var skyline2List = new ArrayList<Skyline2>();
-
         var skyline3List  = new ArrayList<Skyline3>();
 
         var xPosOfBuilding1;
@@ -26,6 +24,9 @@
         var xPosOfPriorBuilding3;
         var widthOfBuilding3;
 
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Set Up ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //drawSkyList voids and the BuildSkyLine voids
         void DrawSkyList1() {
           for(var i = 0; i < skyline1List.size(); i++) {
             Skyline1 currentSkyline1 = skyline1List.get(i);
@@ -87,12 +88,13 @@
               BuildSkyline3();
             }
 
+          //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Window Set Up and FR~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           size(WINDOW_WIDTH, WINDOW_HEIGHT); 
         
-          frameRate(40); 
+          frameRate(50); 
         
         }
-        
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Draw Function~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         void draw() {
         
           background(0, 0, 0);
