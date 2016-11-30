@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>CityScroller</title>
+    <title>KittyCityScroller</title>
     <script src="http://cloud.github.com/downloads/processing-js/processing-js/processing-1.4.1.min.js"></script>
     <script type="text/processing" data-processing-target="mycanvas">
 
@@ -219,6 +219,32 @@
             strokeWeight(3);
             fill(11, 11, 153);
             rect(xPosSkyline2, 600, widthSkyline2, heightSkyline2);
+            fill(235,235,0);
+            if (widthSkyline2 <= 115) {
+              //heightSkyline2/10      as height
+              rect(xPosSkyline2+widthSkyline2/1.5, heightSkyline2+640, widthSkyline2/5, 30);
+              rect(xPosSkyline2+widthSkyline2/6, heightSkyline2+640, widthSkyline2/5, 30);
+              rect(xPosSkyline2+widthSkyline2/1.5, heightSkyline2+700, widthSkyline2/5, 30);
+              rect(xPosSkyline2+widthSkyline2/6, heightSkyline2+700, widthSkyline2/5, 30);
+              rect(xPosSkyline2+widthSkyline2/1.5, heightSkyline2+760, widthSkyline2/5, 30);
+              rect(xPosSkyline2+widthSkyline2/6, heightSkyline2+760, widthSkyline2/5, 30);
+              rect(xPosSkyline2+widthSkyline2/1.5, heightSkyline2+820, widthSkyline2/5, 30);
+              rect(xPosSkyline2+widthSkyline2/6, heightSkyline2+820, widthSkyline2/5, 30);
+              rect(xPosSkyline2+widthSkyline2/1.5, heightSkyline2+880, widthSkyline2/5, 30);
+              rect(xPosSkyline2+widthSkyline2/6, heightSkyline2+880, widthSkyline2/5, 30);
+            }
+            if (widthSkyline2 > 115) {
+              rect(xPosSkyline2+widthSkyline2/1.5, heightSkyline2+640, widthSkyline2/5, 30);
+              rect(xPosSkyline2+widthSkyline2/6, heightSkyline2+640, widthSkyline2/5, 30);
+              rect(xPosSkyline2+widthSkyline2/1.5, heightSkyline2+700, widthSkyline2/5, 30);
+              rect(xPosSkyline2+widthSkyline2/6, heightSkyline2+700, widthSkyline2/5, 30);
+              rect(xPosSkyline2+widthSkyline2/1.5, heightSkyline2+760, widthSkyline2/5, 30);
+              rect(xPosSkyline2+widthSkyline2/6, heightSkyline2+760, widthSkyline2/5, 30);
+              rect(xPosSkyline2+widthSkyline2/1.5, heightSkyline2+820, widthSkyline2/5, 30);
+              rect(xPosSkyline2+widthSkyline2/6, heightSkyline2+820, widthSkyline2/5, 30);
+              rect(xPosSkyline2+widthSkyline2/1.5, heightSkyline2+880, widthSkyline2/5, 30);
+              rect(xPosSkyline2+widthSkyline2/6, heightSkyline2+880, widthSkyline2/5, 30);
+            }
           } 
         
         }
