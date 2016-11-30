@@ -91,7 +91,7 @@
           //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Window Set Up and FR~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           size(WINDOW_WIDTH, WINDOW_HEIGHT); 
         
-          frameRate(50); 
+          frameRate(40); 
         
         }
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Draw Function~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -145,7 +145,7 @@
         
             speedSkyline1 = 10;
 
-            heightSkyline1 = random(-180, -20);
+            heightSkyline1 = random(-180, -60);
         
           } 
           
@@ -170,6 +170,15 @@
             strokeWeight(3);
             fill(19, 15, 255);
             rect(xPosSkyline1, 600, widthSkyline1, heightSkyline1);
+            fill(255,255,0);
+            if (widthSkyline1 <= 115) {
+              rect(xPosSkyline1+widthSkyline1*4/10, heightSkyline1+650, widthSkyline1/5, heightSkyline1/5);
+            }
+            if (widthSkyline1 > 115) {
+              rect(xPosSkyline1+widthSkyline1/1.5, heightSkyline1+650, widthSkyline1/5, heightSkyline1/5);
+              rect(xPosSkyline1+widthSkyline1/6, heightSkyline1+650, widthSkyline1/5, heightSkyline1/5);
+            }
+
 
           } 
         
