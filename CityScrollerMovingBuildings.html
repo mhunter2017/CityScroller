@@ -1,0 +1,260 @@
+<html>
+  <head>
+    <title>CityScroller</title>
+    <script src="http://cloud.github.com/downloads/processing-js/processing-js/processing-1.4.1.min.js"></script>
+    <script type="text/processing" data-processing-target="mycanvas">
+
+        var WINDOW_WIDTH = 1000;
+
+        var WINDOW_HEIGHT = 600; 
+
+        var skyline1List = new ArrayList<Skyline1>();
+
+        var skyline2List = new ArrayList<Skyline2>();
+
+        var skyline3List  = new ArrayList<Skyline3>();
+
+        var xPosOfBuilding1;
+        var xPosOfPriorBuilding1;
+        var widthOfBuilding1;
+
+        var xPosOfBuilding2;
+        var xPosOfPriorBuilding2;
+        var widthOfBuilding2;
+
+        var xPosOfBuilding3;
+        var xPosOfPriorBuilding3;
+        var widthOfBuilding3;
+
+        void DrawSkyList1() {
+          for(var i = 0; i < skyline1List.size(); i++) {
+            Skyline1 currentSkyline1 = skyline1List.get(i);
+            currentSkyline1.moveSkyline1();
+          }
+        } 
+
+        void DrawSkyList2() {
+          for(var i = 0; i < skyline2List.size(); i++) {
+            Skyline2 currentSkyline2 = skyline2List.get(i);
+            currentSkyline2.moveSkyline2();
+          }
+        } 
+
+        void DrawSkyList3() {
+          for(var i = 0; i < skyline3List.size(); i++) {
+            Skyline3 currentSkyline3 = skyline3List.get(i);
+            currentSkyline3.moveSkyline3();
+          }
+        } 
+
+        void BuildSkyline1() {
+    	    widthOfBuilding1 = random(80, 150);
+          xPosOfBuilding1 = xPosOfPriorBuilding1 - widthOfBuilding1;
+          skyline1List.add(new Skyline1(xPosOfBuilding1, widthOfBuilding1)); 
+          xPosOfPriorBuilding1 = xPosOfBuilding1;
+        }
+
+        void BuildSkyline2() {
+    	    widthOfBuilding2 = random(80, 150);
+          xPosOfBuilding2 = xPosOfPriorBuilding2 - widthOfBuilding2;
+          skyline2List.add(new Skyline2(xPosOfBuilding2, widthOfBuilding2)); 
+          xPosOfPriorBuilding2 = xPosOfBuilding2;
+        }
+
+        void BuildSkyline3() {
+          widthOfBuilding3 = random(80, 150);
+          xPosOfBuilding3 = xPosOfPriorBuilding3 - widthOfBuilding3;
+          skyline3List.add(new Skyline3(xPosOfBuilding3, widthOfBuilding3)); 
+          xPosOfPriorBuilding3 = xPosOfBuilding3;
+        }
+
+        void setup() {
+            numberOfSkyline1 = 12;
+            xPosOfPriorBuilding1 = 1000;
+            for(var i = 0; i < numberOfSkyline1; i++) {
+     			    BuildSkyline1();
+          	}
+
+          	numberOfSkyline2 = 12;
+          	xPosOfPriorBuilding2 = 1000;
+          	for(var i = 0; i < numberOfSkyline2; i++) {
+          		BuildSkyline2();
+          	}
+
+            numberOfSkyline3 = 12;
+            xPosOfPriorBuilding3 = 1000;
+            for(var i = 0; i < numberOfSkyline3; i++) {
+              BuildSkyline3();
+            }
+
+          size(WINDOW_WIDTH, WINDOW_HEIGHT); 
+        
+          frameRate(40); 
+        
+        }
+        
+        void draw() {
+        
+          background(0, 0, 0);
+
+          // moon
+          fill(255, 255, 255);
+          ellipse(155, 35, 175, 175);
+
+          // skyline 3
+          DrawSkyList3();
+
+          xPosOfPriorBuilding3 += 3;
+
+          if (xPosOfPriorBuilding3 > -200) {
+            BuildSkyline3();
+          }
+
+          // skyline 2
+          DrawSkyList2();
+
+          xPosOfPriorBuilding2 += 6;
+
+	        if (xPosOfPriorBuilding2 > -200) {
+	    	    BuildSkyline2();
+	        }
+
+          // skyline 1
+          DrawSkyList1();
+
+  	      xPosOfPriorBuilding1 += 10;
+
+  	      if (xPosOfPriorBuilding1 > -200) {
+  	    	  BuildSkyline1();
+          }
+
+        } 
+        
+        // new class ----------------------------------------------------------------------------------------------------------------------------------
+        class Skyline1 {    
+
+          var xPosSkyline1, speedSkyline1, widthSkyline1, heightSkyline1;
+
+          Skyline1 (float xSkyline1, float wSkyline1) {  
+
+            xPosSkyline1 = xSkyline1; 
+
+            widthSkyline1 = wSkyline1;
+        
+            speedSkyline1 = 10;
+
+            heightSkyline1 = random(-180, -20);
+        
+          } 
+          
+          // creating the function that moves and draws the skyline by using two other functions (update and draw)
+          void moveSkyline1() {
+            updateSkyline1();
+            drawSkyline1();
+          }
+          
+          // function that moves the skyline by incrementation
+          void updateSkyline1() { 
+        
+            xPosSkyline1 += speedSkyline1;
+
+            // if (xPosSkyline1-200 > width) { 
+              // Skyline1Array.shift();
+            // }
+          }
+          
+          // function that draws a stationary skyline
+          void drawSkyline1() {
+            strokeWeight(3);
+            fill(19, 15, 255);
+            rect(xPosSkyline1, 600, widthSkyline1, heightSkyline1);
+
+          } 
+        
+        }
+
+        // new class ----------------------------------------------------------------------------------------------------------------------------------
+        class Skyline2 {    
+
+          var xPosSkyline2, speedSkyline2, widthSkyline2, heightSkyline2;
+
+          Skyline2 (float xSkyline2, float wSkyline2) {  
+
+            xPosSkyline2 = xSkyline2;
+
+            widthSkyline2 = wSkyline2;
+        
+            speedSkyline2 = 6;
+
+            heightSkyline2 = random(-400, -160);
+        
+          } 
+          
+          // creating the function that moves and draws the skyline by using two other functions (update and draw)
+          void moveSkyline2() {
+            updateSkyline2();
+            drawSkyline2();
+          }
+          
+          // function that moves the skyline by incrementation
+          void updateSkyline2() { 
+        
+            xPosSkyline2 += speedSkyline2; 
+        
+          }
+          
+          // function that draws a stationary skyline
+          void drawSkyline2() {
+            strokeWeight(3);
+            fill(11, 11, 153);
+            rect(xPosSkyline2, 600, widthSkyline2, heightSkyline2);
+          } 
+        
+        }
+
+        // new class ----------------------------------------------------------------------------------------------------------------------------------
+        class Skyline3 {    
+
+          var xPosSkyline3, speedSkyline3, widthSkyline3, heightSkyline3;
+
+          Skyline3 (float xSkyline3, float wSkyline3) {  
+
+            xPosSkyline3 = xSkyline3; 
+
+            widthSkyline3 = wSkyline3;
+        
+            speedSkyline3 = 3;
+
+            heightSkyline3 = random(-560, -360);
+        
+          } 
+          
+          // creating the function that moves and draws the skyline by using two other functions (update and draw)
+          void moveSkyline3() {
+            updateSkyline3();
+            drawSkyline3();
+          }
+          
+          // function that moves the skyline by incrementation
+          void updateSkyline3() { 
+        
+            xPosSkyline3 += speedSkyline3; 
+        
+          }
+          
+          // function that draws a stationary skyline
+          void drawSkyline3() {
+            strokeWeight(3);
+            fill(5, 5, 92);
+            rect(xPosSkyline3, 600, widthSkyline3, heightSkyline3);
+          } 
+        
+        }
+
+        </script> 
+    </head>
+    
+    <body>
+    <canvas id="mycanvas"></canvas>
+  </body>
+</html>
