@@ -1,0 +1,413 @@
+<html>
+  <head>
+    <title>KittyCityScroller</title>
+    <script src="http://cloud.github.com/downloads/processing-js/processing-js/processing-1.4.1.min.js"></script>
+    <script type="text/processing" data-processing-target="mycanvas">
+
+        Kitty readyKitty = new Kitty(500, 50);
+
+        var LEFT_ARROW = 37;
+        var UP_ARROW = 38; 
+        var RIGHT_ARROW = 39;
+        var DOWN_ARROW = 40;
+
+        var WINDOW_WIDTH = 1000;
+        var WINDOW_HEIGHT = 600; 
+
+        var skyline1List = new ArrayList<Skyline>();
+        var skyline2List = new ArrayList<Skyline>();
+        var skyline3List = new ArrayList<Skyline>();
+
+        var skyline4List = new ArrayList<Skyline>();
+        var skyline5List = new ArrayList<Skyline>();
+        var skyline6List = new ArrayList<Skyline>();
+
+        var widthOfBuilding1;
+        var widthOfBuilding2;
+        var widthOfBuilding3;
+        var widthOfBuilding4;
+        var widthOfBuilding5;
+        var widthOfBuilding6;
+
+        var xPosOfFirstBuilding1;
+        var xPosOfFirstBuilding2;
+        var xPosOfFirstBuilding3;
+
+        var xPosOfBuilding1;
+        var xPosOfBuilding2;
+        var xPosOfBuilding3;
+        var xPosOfBuilding4;
+        var xPosOfBuilding5;
+        var xPosOfBuilding6;
+
+        var xPosOfPriorBuilding1;
+        var xPosOfPriorBuilding2;
+        var xPosOfPriorBuilding3;
+        var xPosOfPriorBuilding4;
+        var xPosOfPriorBuilding5;
+        var xPosOfPriorBuilding6;
+
+        var speedOfBuilding1 = 9;
+        var speedOfBuilding2 = 6;
+        var speedOfBuilding3 = 3;
+        var speedOfBuilding4 = 9;
+        var speedOfBuilding5 = 6;
+        var speedOfBuilding6 = 3;
+
+        var heightOfBuilding1;
+        var heightOfBuilding2;
+        var heightOfBuilding3;
+        var heightOfBuilding4;
+        var heightOfBuilding5;
+        var heightOfBuilding6;
+
+        var color1OfBuilding1 = 19;
+        var color2OfBuilding1 = 15;
+        var color3OfBuilding1 = 255;
+
+        var color1OfBuilding2 = 11;
+        var color2OfBuilding2 = 11;
+        var color3OfBuilding2 = 153;
+
+        var color1OfBuilding3 = 5;
+        var color2OfBuilding3 = 5;
+        var color3OfBuilding3 = 92;
+
+        void DrawSkyList1() {
+          for(var i = 0; i < skyline1List.size(); i++) {
+            Skyline currentSkyline1 = skyline1List.get(i);
+            currentSkyline1.drawSkyline();
+          }
+        } 
+
+        void DrawSkyList2() {
+          for(var i = 0; i < skyline2List.size(); i++) {
+            Skyline currentSkyline2 = skyline2List.get(i);
+            currentSkyline2.drawSkyline();
+          }
+        } 
+
+        void DrawSkyList3() {
+          for(var i = 0; i < skyline3List.size(); i++) {
+            Skyline currentSkyline3 = skyline3List.get(i);
+            currentSkyline3.drawSkyline();
+          }
+        } 
+
+        void BuildSkyline1() {
+          widthOfBuilding1 = random(80, 150);
+          heightOfBuilding1 = random(-180, -60);
+          xPosOfBuilding1 = xPosOfPriorBuilding1 - widthOfBuilding1;
+          skyline1List.add(new Skyline(xPosOfBuilding1, widthOfBuilding1, speedOfBuilding1, heightOfBuilding1, color1OfBuilding1, color2OfBuilding1, color3OfBuilding1)); 
+          xPosOfPriorBuilding1 = xPosOfBuilding1;
+        }
+
+        void BuildSkyline2() {
+          widthOfBuilding2 = random(80, 150);
+          heightOfBuilding2 = random(-400, -160);
+          xPosOfBuilding2 = xPosOfPriorBuilding2 - widthOfBuilding2;
+          skyline2List.add(new Skyline(xPosOfBuilding2, widthOfBuilding2, speedOfBuilding2, heightOfBuilding2, color1OfBuilding2, color2OfBuilding2, color3OfBuilding2)); 
+          xPosOfPriorBuilding2 = xPosOfBuilding2;
+        }
+
+        void BuildSkyline3() {
+          widthOfBuilding3 = random(80, 150);
+          heightOfBuilding3 = random(-560, -360);
+          xPosOfBuilding3 = xPosOfPriorBuilding3 - widthOfBuilding3;
+          skyline3List.add(new Skyline(xPosOfBuilding3, widthOfBuilding3, speedOfBuilding3, heightOfBuilding3, color1OfBuilding3, color2OfBuilding3, color3OfBuilding3)); 
+          xPosOfPriorBuilding3 = xPosOfBuilding3;
+        }
+
+        void BuildSkyline4() {
+          widthOfBuilding4 = random(80, 150);
+          heightOfBuilding4 = random(-180, -60);
+          xPosOfBuilding4 = xPosOfFirstBuilding1;   //+ widthOfBuilding4; 
+          skyline4List.add(new Skyline(xPosOfBuilding4, widthOfBuilding4, speedOfBuilding4, heightOfBuilding4, color1OfBuilding1, color2OfBuilding1, color3OfBuilding1));
+          xPosOfFirstBuilding1 = xPosOfBuilding4;
+        }
+
+        void BuildSkyline5() {
+          widthOfBuilding5 = random(80, 150);
+          heightOfBuilding5 = random(-400, -160);
+          xPosOfBuilding5 = xPosOfFirstBuilding2; // + widthOfBuilding5;
+          skyline5List.add(new Skyline(xPosOfBuilding5, widthOfBuilding5, speedOfBuilding5, heightOfBuilding5, color1OfBuilding2, color2OfBuilding2, color3OfBuilding2)); 
+          xPosOfFirstBuilding2 = xPosOfBuilding5;
+        }
+
+        void BuildSkyline6() {
+          widthOfBuilding6 = random(80, 150);
+          heightOfBuilding6 = random(-560, -360);
+          xPosOfBuilding6 = xPosOfFirstBuilding3; //+ widthOfBuilding6;
+          skyline6List.add(new Skyline(xPosOfBuilding6, widthOfBuilding6, speedOfBuilding6, heightOfBuilding6, color1OfBuilding3, color2OfBuilding3, color3OfBuilding3)); 
+          xPosOfFirstBuilding3 = xPosOfBuilding6;
+        }
+
+        void setup() {
+            numberOfSkyline1 = 12;
+            xPosOfPriorBuilding1 = 1000;
+            for(var i = 0; i < numberOfSkyline1; i++) {
+              BuildSkyline1();
+            }
+
+            numberOfSkyline2 = 12;
+            xPosOfPriorBuilding2 = 1000;
+            for(var i = 0; i < numberOfSkyline2; i++) {
+              BuildSkyline2();
+            }
+
+            numberOfSkyline3 = 12;
+            xPosOfPriorBuilding3 = 1000;
+            for(var i = 0; i < numberOfSkyline3; i++) {
+              BuildSkyline3();
+            }
+
+            xPosOfFirstBuilding1 = 1000;
+              BuildSkyline3();
+
+          size(WINDOW_WIDTH, WINDOW_HEIGHT); 
+        
+          frameRate(50); 
+        
+        }
+
+        void draw() {
+        
+          background(0, 0, 0);
+
+          // moon
+          fill(255, 255, 255);
+          ellipse(155, 35, 175, 175);
+
+          // skyline 3
+          DrawSkyList3();
+
+          // xPosOfPriorBuilding3 += 3;
+
+          if (xPosOfPriorBuilding3 > -200) {
+            BuildSkyline3();
+          }
+
+          // skyline 2
+          DrawSkyList2();
+
+          // xPosOfPriorBuilding2 += 6;
+
+          if (xPosOfPriorBuilding2 > -200) {
+            BuildSkyline2();
+          }
+
+          // skyline 1
+          DrawSkyList1();
+
+          // xPosOfPriorBuilding1 += 9;
+
+          if (xPosOfPriorBuilding1 > -200) {
+            BuildSkyline1();
+          }
+
+          readyKitty.moveKitty();
+
+        } 
+
+        // new class ----------------------------------------------------------------------------------------------------------------------------------
+        class Skyline {
+
+          var xPosSkyline, widthSkyline, speedSkyline, heightSkyline, color1Skyline, color2Skyline, color3Skyline;
+
+          Skyline (float xSkyline, float wSkyline, float sSkyline, float hSkyline, float c1Skyline, float c2Skyline, float c3Skyline) {
+
+            xPosSkyline = xSkyline;
+
+            widthSkyline = wSkyline;
+
+            speedSkyline = sSkyline;
+
+            heightSkyline = hSkyline;
+
+            color1Skyline = c1Skyline;
+
+            color2Skyline = c2Skyline;
+
+            color3Skyline = c3Skyline;
+
+          }
+
+          void moveSkyline() {
+
+            updateSkyline();
+            drawSkyline();
+
+          }
+
+          void updateSkyline() { 
+        
+            xPosSkyline += speedSkyline;
+
+          }
+          void drawSkyline() {
+
+            strokeWeight(3);
+            fill(color1Skyline, color2Skyline, color3Skyline);
+            rect(xPosSkyline, 600, widthSkyline, heightSkyline);
+
+          } 
+
+        }
+
+        // new class ----------------------------------------------------------------------------------------------------------------------------------
+        class Kitty {
+
+          var kittyX, kittyY, coins;
+          PImage img;
+
+          Kitty (var kX, var kY) {
+
+            kittyX = kX;
+
+            kittyY = kY;
+
+            img = loadImage("nyan cat-2.gif");
+
+            coins = 0;
+
+          }
+
+          void moveKitty() {
+
+            loadImage("nyan cat-2.gif");
+            drawKitty();
+            updateKitty();
+
+          }
+
+          void updateKitty() {
+
+            if (keyPressed && keyCode == UP_ARROW) {
+              jump();
+            }
+
+            else if (keyPressed && keyCode == LEFT_ARROW) {
+
+              moveLeft();
+
+              for(var i = 0; i < skyline1List.size(); i++) {
+                Skyline currentSkyline1 = skyline1List.get(i);
+                currentSkyline1.updateSkyline();
+              }
+              for(var i = 0; i < skyline2List.size(); i++) {
+                Skyline currentSkyline2 = skyline2List.get(i);
+                currentSkyline2.updateSkyline();
+              }
+              for(var i = 0; i < skyline3List.size(); i++) {
+                Skyline currentSkyline3 = skyline3List.get(i);
+                currentSkyline3.updateSkyline();
+              }
+              for(var i = 0; i < skyline4List.size(); i++) {
+                Skyline currentSkyline4 = skyline4List.get(i);
+                currentSkyline4.updateSkyline();
+              }
+              for(var i = 0; i < skyline5List.size(); i++) {
+                Skyline currentSkyline5 = skyline5List.get(i);
+                currentSkyline5.updateSkyline();
+              }
+              for(var i = 0; i < skyline6List.size(); i++) {
+                Skyline currentSkyline6 = skyline6List.get(i);
+                currentSkyline6.updateSkyline();
+              }
+
+              xPosOfPriorBuilding6 += 3;
+              xPosOfPriorBuilding5 += 6;
+              xPosOfPriorBuilding4 += 9;
+              xPosOfPriorBuilding3 += 3;
+              xPosOfPriorBuilding2 += 6;
+              xPosOfPriorBuilding1 += 9;
+
+            }
+
+            else if (keyPressed && keyCode == RIGHT_ARROW) {
+
+              moveRight();
+
+              for(var i = 0; i < skyline1List.size(); i++) {
+                Skyline currentSkyline1 = skyline1List.get(i);
+                currentSkyline1.updateSkyline();
+              }
+              for(var i = 0; i < skyline2List.size(); i++) {
+                Skyline currentSkyline2 = skyline2List.get(i);
+                currentSkyline2.updateSkyline();
+              }
+              for(var i = 0; i < skyline3List.size(); i++) {
+                Skyline currentSkyline3 = skyline3List.get(i);
+                currentSkyline3.updateSkyline();
+              }
+              for(var i = 0; i < skyline4List.size(); i++) {
+                Skyline currentSkyline4 = skyline4List.get(i);
+                currentSkyline4.updateSkyline();
+              }
+              for(var i = 0; i < skyline5List.size(); i++) {
+                Skyline currentSkyline5 = skyline5List.get(i);
+                currentSkyline5.updateSkyline();
+              }
+              for(var i = 0; i < skyline6List.size(); i++) {
+                Skyline currentSkyline6 = skyline6List.get(i);
+                currentSkyline6.updateSkyline();
+              }
+
+              xPosOfPriorBuilding6 -= 3;
+              xPosOfPriorBuilding5 -= 6;
+              xPosOfPriorBuilding4 -= 9;
+              xPosOfPriorBuilding3 -= 3;
+              xPosOfPriorBuilding2 -= 6;
+              xPosOfPriorBuilding1 -= 9;
+
+            }
+
+            else {
+              fall();
+            }
+
+          }
+
+          void drawKitty() { 
+
+            image(img, kittyX, kittyY, 64, 64);
+
+          }
+
+          void jump() {
+
+            img = loadImage("nyan cat-2.gif");
+            kittyY -= 30;
+
+          }
+
+          void moveLeft() {
+            img = loadImage("nyan cat-2.gif");
+            // kittyX -= 25;
+          }
+
+          void moveRight() {
+
+            img = loadImage("nyan cat-2.gif");
+            // kittyX += 25;
+
+          }
+
+          void fall() {
+
+           if(kittyY < height - 65) {
+              kittyY += 15;
+
+            }
+        
+          }
+
+        }
+        
+        </script> 
+    </head>
+    
+    <body>
+    <canvas id="mycanvas"></canvas>
+  </body>
+</html>
