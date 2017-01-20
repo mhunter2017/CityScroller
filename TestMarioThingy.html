@@ -91,30 +91,6 @@
           }
         } 
 
-        void BuildSkylineA() {
-          widthOfBuildingA = random(80, 150);
-          heightOfBuildingA = random(-180, -60);
-          xPosOfPriorBuildingA = xPosOfBuildingA;
-          skyline1List.add(new Skyline(xPosOfBuildingA, widthOfBuildingA, speedOfBuilding1, heightOfBuildingA, color1OfBuilding1, color2OfBuilding1, color3OfBuilding1)); 
-          xPosOfBuildingA = xPosOfPriorBuildingA + widthOfBuildingA;
-        }
-
-        void BuildSkylineB() {
-	      widthOfBuildingB = random(80, 150);
-	      heightOfBuildingB = random(-400, -160);
-	      xPosOfPriorBuildingB = xPosOfBuildingB;
-	      skyline2List.add(new Skyline(xPosOfBuildingB, widthOfBuildingB, speedOfBuilding2, heightOfBuildingB, color1OfBuilding2, color2OfBuilding2, color3OfBuilding2)); 
-	      xPosOfBuildingB = xPosOfPriorBuildingB + widthOfBuildingB;
-        }
-
-        void BuildSkylineC() {
-	      widthOfBuildingC = random(80, 150);
-	      heightOfBuildingC = random(-560, -360);
-	      xPosOfPriorBuildingC = xPosOfBuildingC;
-	      skyline3List.add(new Skyline(xPosOfBuildingC, widthOfBuildingC, speedOfBuilding3, heightOfBuildingC, color1OfBuilding3, color2OfBuilding3, color3OfBuilding3)); 
-	      xPosOfBuildingC = xPosOfPriorBuildingC + widthOfBuildingC;
-        }
-
         void BuildSkyline1() {
           widthOfBuilding1 = random(80, 150);
           heightOfBuilding1 = random(-180, -60);
@@ -139,31 +115,56 @@
           xPosOfPriorBuilding3 = xPosOfBuilding3;
         }
 
+        void BuildSkylineA() {
+          widthOfBuildingA = random(80, 150);
+          heightOfBuildingA = random(-180, -60);
+          xPosOfBuildingA = xPosOfPriorBuildingA;
+          skyline1List.add(new Skyline(xPosOfBuildingA, widthOfBuildingA, speedOfBuilding1, heightOfBuildingA, color1OfBuilding1, color2OfBuilding1, color3OfBuilding1)); 
+          xPosOfPriorBuildingA = xPosOfBuildingA + widthOfBuildingA;
+        }
+
+        void BuildSkylineB() {
+	      widthOfBuildingB = random(80, 150);
+	      heightOfBuildingB = random(-400, -160);
+	      xPosOfBuildingB = xPosOfPriorBuildingB;
+	      skyline2List.add(new Skyline(xPosOfBuildingB, widthOfBuildingB, speedOfBuilding2, heightOfBuildingB, color1OfBuilding2, color2OfBuilding2, color3OfBuilding2)); 
+	      xPosOfPriorBuildingB = xPosOfBuildingB + widthOfBuildingB;
+        }
+
+        void BuildSkylineC() {
+	      widthOfBuildingC = random(80, 150);
+	      heightOfBuildingC = random(-560, -360);
+	      xPosOfBuildingC = xPosOfPriorBuildingC;
+	      skyline3List.add(new Skyline(xPosOfBuildingC, widthOfBuildingC, speedOfBuilding3, heightOfBuildingC, color1OfBuilding3, color2OfBuilding3, color3OfBuilding3)); 
+	      xPosOfPriorBuildingC = xPosOfBuildingC + widthOfBuildingC;
+        }
+
         void setup() {
+
             numberOfSkyline1 = 20;
             xPosOfPriorBuilding1 = 1500;
-            xPosOfBuildingA = 1500;
+            xPosOfPriorBuildingA = 1500;
             for(var i = 0; i < numberOfSkyline1; i++) {
               BuildSkyline1();
             }
 
             numberOfSkyline2 = 20;
             xPosOfPriorBuilding2 = 1500;
-            xPosOfBuildingB = 1500;
+            xPosOfPriorBuildingB = 1500;
             for(var i = 0; i < numberOfSkyline2; i++) {
               BuildSkyline2();
             }
 
             numberOfSkyline3 = 20;
             xPosOfPriorBuilding3 = 1500;
-            xPosOfBuildingC = 1500;
+            xPosOfPriorBuildingC = 1500;
             for(var i = 0; i < numberOfSkyline3; i++) {
               BuildSkyline3();
             }
 
           size(WINDOW_WIDTH, WINDOW_HEIGHT); 
         
-          frameRate(50); 
+          frameRate(20); 
         
         }
 
@@ -181,11 +182,15 @@
           // xPosOfPriorBuilding3 += 3;
 
           if (xPosOfPriorBuilding3 > -200) {
+
             BuildSkyline3();
+
           }
 
-          if (xPosOfBuildingC > 1000) {
+          if (xPosOfPriorBuildingC < 1200) {
+
           	BuildSkylineC();
+
           }
 
           // skyline 2
@@ -194,11 +199,15 @@
           // xPosOfPriorBuilding2 += 6;
 
           if (xPosOfPriorBuilding2 > -200) {
+
             BuildSkyline2();
+
           }
 
-          if (xPosOfBuildingB > 1000) {
+          if (xPosOfPriorBuildingB < 1200) {
+
           	BuildSkylineB();
+
           }
 
           // skyline 1
@@ -207,11 +216,15 @@
           // xPosOfPriorBuilding1 += 9;
 
           if (xPosOfPriorBuilding1 > -200) {
+
             BuildSkyline1();
+
           }
 
-          if (xPosOfBuildingA > 1000) {
+          if (xPosOfPriorBuildingA < 1200) {
+
           	BuildSkylineA();
+
           }
 
           readyKitty.moveKitty();
@@ -265,6 +278,29 @@
             strokeWeight(3);
             fill(color1Skyline, color2Skyline, color3Skyline);
             rect(xPosSkyline, 600, widthSkyline, heightSkyline);
+            if(heightSkyline<= -200){
+              fill(250, 250, 0);
+            rect(xPosSkyline+widthSkyline/1.5, heightSkyline+940, widthSkyline/5, heightSkyline/12);
+            rect(xPosSkyline+widthSkyline/6, heightSkyline+940, widthSkyline/5, heightSkyline/12);
+            rect(xPosSkyline+widthSkyline/1.5, heightSkyline+870, widthSkyline/5, heightSkyline/12);
+            rect(xPosSkyline+widthSkyline/6, heightSkyline+870, widthSkyline/5, heightSkyline/12);
+            rect(xPosSkyline+widthSkyline/1.5, heightSkyline+800, widthSkyline/5, heightSkyline/12);
+            rect(xPosSkyline+widthSkyline/6, heightSkyline+800, widthSkyline/5, heightSkyline/12);
+            rect(xPosSkyline+widthSkyline/1.5, heightSkyline+730, widthSkyline/5, heightSkyline/12);
+            rect(xPosSkyline+widthSkyline/6, heightSkyline+730, widthSkyline/5, heightSkyline/12);
+            rect(xPosSkyline+widthSkyline/1.5, heightSkyline+660, widthSkyline/5, heightSkyline/12);
+            rect(xPosSkyline+widthSkyline/6, heightSkyline+660, widthSkyline/5, heightSkyline/12);
+            }
+            else{
+              fill(250, 250, 0);
+            rect(xPosSkyline+widthSkyline/1.5, heightSkyline+750, widthSkyline/5, heightSkyline/5);
+            rect(xPosSkyline+widthSkyline/6, heightSkyline+750, widthSkyline/5, heightSkyline/5);
+            rect(xPosSkyline+widthSkyline/1.5, heightSkyline+700, widthSkyline/5, heightSkyline/5);
+            rect(xPosSkyline+widthSkyline/6, heightSkyline+700, widthSkyline/5, heightSkyline/5);
+            rect(xPosSkyline+widthSkyline/1.5, heightSkyline+650, widthSkyline/5, heightSkyline/5);
+            rect(xPosSkyline+widthSkyline/6, heightSkyline+650, widthSkyline/5, heightSkyline/5);
+            }
+            
 
           } 
 
@@ -282,7 +318,7 @@
 
             kittyY = kY;
 
-            img = loadImage("nyan cat-2.gif");
+            img = loadImage("nyancat-2.gif");
 
             coins = 0;
 
@@ -290,7 +326,7 @@
 
           void moveKitty() {
 
-            loadImage("nyan cat-2.gif");
+            loadImage("nyancat-2.gif");
             drawKitty();
             updateKitty();
 
@@ -299,7 +335,9 @@
           void updateKitty() {
 
             if (keyPressed && keyCode == UP_ARROW) {
+
               jump();
+
             }
 
             else if (keyPressed && keyCode == LEFT_ARROW) {
@@ -310,18 +348,24 @@
                 Skyline currentSkyline1 = skyline1List.get(i);
                 currentSkyline1.update1Skyline();
               }
+
               for(var i = 0; i < skyline2List.size(); i++) {
                 Skyline currentSkyline2 = skyline2List.get(i);
                 currentSkyline2.update1Skyline();
               }
+
               for(var i = 0; i < skyline3List.size(); i++) {
                 Skyline currentSkyline3 = skyline3List.get(i);
                 currentSkyline3.update1Skyline();
               }
 
-              xPosOfPriorBuilding3 += 3;
-              xPosOfPriorBuilding2 += 6;
-              xPosOfPriorBuilding1 += 9;
+              xPosOfPriorBuilding3 += speedOfBuilding3;
+              xPosOfPriorBuilding2 += speedOfBuilding2;
+              xPosOfPriorBuilding1 += speedOfBuilding1;
+
+              xPosOfPriorBuildingC += speedOfBuilding3;
+              xPosOfPriorBuildingB += speedOfBuilding2;
+              xPosOfPriorBuildingA += speedOfBuilding1;
 
             }
 
@@ -333,18 +377,24 @@
                 Skyline currentSkyline1 = skyline1List.get(i);
                 currentSkyline1.update2Skyline();
               }
+
               for(var i = 0; i < skyline2List.size(); i++) {
                 Skyline currentSkyline2 = skyline2List.get(i);
                 currentSkyline2.update2Skyline();
               }
+
               for(var i = 0; i < skyline3List.size(); i++) {
                 Skyline currentSkyline3 = skyline3List.get(i);
                 currentSkyline3.update2Skyline();
               }
 
-              xPosOfPriorBuilding3 -= 3;
-              xPosOfPriorBuilding2 -= 6;
-              xPosOfPriorBuilding1 -= 9;
+              xPosOfPriorBuilding3 -= speedOfBuilding3;
+              xPosOfPriorBuilding2 -= speedOfBuilding2;
+              xPosOfPriorBuilding1 -= speedOfBuilding1;
+
+              xPosOfPriorBuildingC -= speedOfBuilding3;
+              xPosOfPriorBuildingB -= speedOfBuilding2;
+              xPosOfPriorBuildingA -= speedOfBuilding1;
 
             }
 
@@ -364,20 +414,20 @@
 
           void jump() {
 
-            img = loadImage("nyan cat-2.gif");
+            img = loadImage("nyancat-2.gif");
             kittyY -= 30;
 
           }
 
           void moveLeft() {
-            img = loadImage("nyan cat-2.gif");
-            // kittyX -= 25;
+
+            img = loadImage("nyancat-2.gif");
+
           }
 
           void moveRight() {
 
-            img = loadImage("nyan cat-2.gif");
-            // kittyX += 25;
+            img = loadImage("nyancat-2.gif");
 
           }
 
@@ -386,7 +436,7 @@
            if(kittyY < height - 65) {
               kittyY += 15;
 
-            }
+           }
         
           }
 
